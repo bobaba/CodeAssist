@@ -42,6 +42,7 @@ h1, h3{
 	font-family: 'Caveat Brush', cursive;
 	color: white;
 	text-shadow: 2px 2px 2px #000000;
+
 }
 
 .btn-block{
@@ -71,6 +72,7 @@ h1, h3{
 	border-width: 1px;
 	background-color: #fcfcfc;
 	box-shadow: 0px 0px 10px 0px grey inset; 
+	color: gray;
 }
 
 #boxColor{
