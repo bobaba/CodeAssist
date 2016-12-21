@@ -39,8 +39,6 @@
 		
 	</div>
 	<div class="panel-footer" id="boxColor">
-		<% blogStat = BlogPost.new %>
-		<div align="right">Word Count: <%= blogStat.getWordCount(@blog_post.entry) %></div>
 		<% if current_user.id == @blog_post.user.id %>
 		<%= link_to "Edit", edit_blog_post_path(@blog_post), class: "btn btn-warning" %>
 		<% end %>
