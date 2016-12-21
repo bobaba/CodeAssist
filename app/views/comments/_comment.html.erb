@@ -1,0 +1,14 @@
+<% @blog_post.comments.each do |comment| %>
+	<div class="panel panel-default">
+	<div class="panel-heading" id="boxColor2">
+		<strong><%= link_to comment.user.username, user_profile_path(id: comment.user.id) %></strong> &nbsp&nbsp&nbsp&nbsp
+		<%= time_ago_in_words(comment.created_at) %> ago
+	</div>
+	<div class="panel-body">
+		<p><%= comment.entry %></p>
+	</div>
+	<div class="panel-footer" id="boxColor2">
+		
+	</div>
+	</div>
+<% end %>

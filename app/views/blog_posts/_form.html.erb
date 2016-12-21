@@ -1,0 +1,62 @@
+
+<%= form_for(@blog_post) do |f| %>
+	<% if @blog_post.errors.any? %>
+		<div class="error_explanation">
+		<h2><%= pluralize(@blog_post.errors.count, "error") %> prohibited this blog post from being saved:</h2>
+		<ul>
+			<% @blog_post.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+			<% end %>
+		</ul>
+		</div>
+	<% end %>
+	
+<div class="panel panel-default">
+	<div class="panel-heading" id="boxColor">
+	<div align="center" class="showTitle">
+	
+	<div class="form-group">
+	<%= f.text_field :title, class: "form-control", placeholder: "Title of paper" %>
+	</div>
+	</div>
+
+	<strong>Author:</strong> <%= current_user.username %>
+			<br>
+	<strong>Submitted:</strong> <%= Time.current.strftime('%m/%d/%Y (%I:%M%p)') %>
+	</div>
+
+	<div class="form-group hidden">
+	<%= f.number_field :user_id, value: current_user.id %>
+	</div>
+
+<div class="panel-body bluish">
+<div class="panel-group" style="max-width: 800px; text-align: center;">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" href="#collapse1">Insert Code Here</a>
+      </h4>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse">
+      <div class="panel-body">
+	<div class="form-group">
+	<%= f.text_area :codeblock, class: "form-control", rows: "5", placeholder: "Place your code here!" %>
+	</div>
+	 </div>
+    </div>
+  </div>
+</div>
+
+	<div class="form-group">
+	<%= f.text_area :entry, class: "form-control", rows: "12", placeholder: "Comments about your code..." %>
+	</div>
+</div>
+
+<div class="panel-footer" id="boxColor">
+	<div class="actions">
+	<%= f.submit "Post", class: "btn btn-default" %>
+	</div>
+</div>
+</div>
+	
+<% end %>

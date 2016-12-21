@@ -1,0 +1,44 @@
+<link href="https://fonts.googleapis.com/css?family=Caveat+Brush" rel="stylesheet">
+<div class="container">
+<h1><%= @user.username %>'s Profile</h1>
+<h3>Name: <%= @user.name %></h3>
+<h3>Birthdate: <%= @user.birthdate.strftime('%m/%d/%Y') %></h3>
+<!-- Get more fancy with a picture, some info, etc -->
+<h1><%= @user.username %>'s Papers</h1>
+<div class="row">
+<br>
+	<% @user.blog_posts.each do |blog_post| %>
+		<div class="col-md-4">
+		<div class="panel panel-default">
+			<div class="panel-heading" id="boxColor">
+				<%= link_to blog_post.title[0..36], blog_post, class: "btn btn-default btn-block" %> 
+				<div align="right">by <%= blog_post.user.username %></div>
+			</div>
+			<div class="panel-body indexBody">
+				<p><%= blog_post.entry[0..250] %>...</p>
+				<div align="right">
+					<%= link_to '...read more', blog_post %>
+				</div>
+			</div>
+			<div class="panel-footer" id="boxColor">
+				Submitted: <%= blog_post.created_at.strftime('%m/%d/%Y (%I:%M%p)') %>
+				<br>
+				<%= blog_post.category %>
+				<br>
+				<strong><%= blog_post.comments.count %></strong> Reviews
+				<br>
+				<% length = BlogPost.new %>
+				<%= length.longShort(blog_post.entry) %>
+
+				<br>
+				<% if current_user.id == blog_post.user.id %>
+				<%= link_to 'Edit', edit_blog_post_path(blog_post), class: "btn btn-warning" %>
+				<%= link_to 'Remove', blog_post, method: :delete, data: {confirm: "Are you sure you want to remove this post?"}, class: "btn btn-danger" %>
+				<% end %>
+			</div>
+		</div>
+		</div>
+	<% end %>
+
+</div>
+</div>

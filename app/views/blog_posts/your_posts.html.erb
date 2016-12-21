@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+<link href="https://fonts.googleapis.com/css?family=Caveat+Brush" rel="stylesheet">
+
+<div class="container">
+
+
+<div class="row">
+<br>
+	<% current_user.blog_posts.each do |blog_post| %>
+		<div class="col-md-4">
+		<div class="panel panel-default">
+			<div class="panel-heading" id="boxColor">
+				<%= link_to blog_post.title[0..36], blog_post, class: "btn btn-default btn-block bluish" %> 
+				<div align="right">by <%= blog_post.user.username %></div>
+			</div>
+			<div class="panel-body indexBody">
+				<p><%= blog_post.entry[0..250] %>...</p>
+				<div align="right">
+					<%= link_to '...read more', blog_post %>
+				</div>
+			</div>
+			<div class="panel-footer" id="boxColor">
+				Submitted: <%= blog_post.created_at.strftime('%m/%d/%Y (%I:%M%p)') %>
+				<br>
+				<%= blog_post.category %>
+				<br>
+				<strong><%= blog_post.comments.count %></strong> Reviews
+				<br>
+				<% length = BlogPost.new %>
+				<%= length.longShort(blog_post.entry) %>
+
+				<br>
+				<%= link_to 'Edit', edit_blog_post_path(blog_post), class: "btn btn-warning" %>
+				<%= link_to 'Remove', blog_post, method: :delete, data: {confirm: "Are you sure you want to remove this post?"}, class: "btn btn-danger" %>
+			</div>
+		</div>
+		</div>
+	<% end %>
+
+</div>
+</div>
+
+

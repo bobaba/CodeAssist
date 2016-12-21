@@ -1,0 +1,68 @@
+<p id="notice"><%= notice %></p>
+<div class="container">
+
+
+<div class="panel panel-default">
+	<div class="panel-heading" id="boxColor">
+	<div align="center" class="showTitle bluish">
+		<h1><%= @blog_post.title %></h1>
+	</div>
+	<div align="right">
+		<%= @blog_post.category %>
+	</div>
+	<strong>Author:</strong> <%= link_to @blog_post.user.username, user_profile_path(id: @blog_post.user.id) %>
+			<br>
+	<strong>Submitted:</strong> <%= @blog_post.created_at.strftime('%m/%d/%Y (%I:%M%p)') %>
+	
+	</div>
+
+
+	<div class="panel-body">
+<div class="panel-group" style="max-width: 800px;">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title" style="text-align: center;">
+        <a data-toggle="collapse" href="#collapse1">The Code</a>
+      </h4>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse">
+      <div class="panel-body">
+      <pre>
+      <code><%= @blog_post.codeblock %></code>
+      </pre>
+      </div>
+     </div>
+    </div>
+   </div>
+		
+		<p><%= @blog_post.entry %></p>
+		
+	</div>
+	<div class="panel-footer" id="boxColor">
+		<% blogStat = BlogPost.new %>
+		<div align="right">Word Count: <%= blogStat.getWordCount(@blog_post.entry) %></div>
+		<% if current_user.id == @blog_post.user.id %>
+		<%= link_to "Edit", edit_blog_post_path(@blog_post), class: "btn btn-warning" %>
+		<% end %>
+		<%= link_to "Back", blog_posts_path, class: "btn btn-default" %>	
+		
+	</div>
+</div>
+<h3>Reviews (<%= @blog_post.comments.count %>)</h3> 
+	<div class="panel-body">
+		<%= render @comment %>
+
+	</div>
+
+<h3>Add to the Conversation</h3>
+
+	<div class="panel-body">
+	<%= render 'comments/form' %>
+	</div>
+</div>
+
+<div>
+
+
+</div>
+</div>
