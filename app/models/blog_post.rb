@@ -1,24 +1,22 @@
 class BlogPost < ApplicationRecord
-	validates :title, :entry, presence: true
-	validates :title, uniqueness: true, length: {maximum: 250}
+	validates :title, :entry, :codetype, presence: true
+	validates :title, uniqueness: true, length: {maximum: 45}
 	has_many :comments
 	belongs_to :user
 
-	def getWordCount(countWhat)
-		store = countWhat
-		storeArr = store.split(" ")
-		return storeArr.size
-	end
-
-	def longShort(countWhat)
-		store = countWhat
-		storeArr = store.split(" ")
-		answer = ""
-		if storeArr.size > 500
-			answer = "Long Read"
-		else
-			answer = "Quick Read"
+	def answered
+		a2 = []
+		self.comments.each do |search|
+			if search.rating == 1
+				a2.push(search.rating)
+			end
 		end
-		return answer
+
+		if a2.size > 0
+			return true
+		else
+			return false
+		end
+
 	end
 end

@@ -1,20 +1,21 @@
 <p id="notice"><%= notice %></p>
-<link href="https://fonts.googleapis.com/css?family=Caveat+Brush" rel="stylesheet">
+<br><br>
+
+
 
 <div class="container">
+
+<br><br>
+<h1>Recent Submissions</h1><%= link_to "All", blog_posts_path, class: "btn btn-default" %>  <%= link_to "Answered", answered_path, class: "btn btn-success" %>  <%= link_to "Unanswered", unanswered_path, class: "btn btn-warning" %> 
 
 
 <div class="row">
 <br>
-<% current_user.blog_posts.reverse_each do |blog_post| %>
+	<% @blog_posts.reverse_each do |blog_post| %>
 		<div class="col-md-4">
 		<div class="thumbnail" style="padding-top: 15px; margin: 10px;">
-			<div style="margin: 3px;">
-			
-			</div>
-				<%= link_to gravatar_tag(blog_post.user.email, size: 100), blog_post %>
+			<%= link_to gravatar_tag(blog_post.user.email, size: 100), blog_post %>
 			<div class="caption">
-				<!-- style h3 to model TTS -->
 				<h3 style="height: 55px; margin-bottom: 20px;"><%= link_to blog_post.title, blog_post,{:style=>'color:#000000; text-decoration: none;'} %></h3>
 				
 				<p style="height: 140px;"><%= blog_post.entry[0..300] %><% if blog_post.entry.size > 300 %>...<% end %></p>
@@ -23,16 +24,13 @@
 				<strong><%= blog_post.comments.count %></strong> Comments
 				<br><br>				
 				<p><%= link_to 'Read more', blog_post, class: "btn btn-default" %>
-				   <%= link_to 'Edit', edit_blog_post_path(blog_post), class: "btn btn-warning" %>
+				
 				<% if blog_post.answered == true %>
 					<%= link_to 'Answered', blog_post, class: "btn btn-success pull-right" %>
 					<% else %>
 					<%= link_to 'Unanswered', blog_post, class: "btn btn-warning pull-right" %>
 					<% end %>
-					<br>
-				<div style="text-align: center;">
 				
-				</div>
 				</p>
 				
 
@@ -40,10 +38,8 @@
 			</div>
 		</div>
 		</div>
+
 	<% end %>
-	
 
 </div>
 </div>
-
-

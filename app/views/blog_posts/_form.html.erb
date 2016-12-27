@@ -10,53 +10,85 @@
 		</ul>
 		</div>
 	<% end %>
+
+
+
+<div class="container">
+	<%= link_to "Back", blog_posts_path, class: "btn btn-default pull-left" %>
+</div>
+
 	
-<div class="panel panel-default">
-	<div class="panel-heading" id="boxColor">
-	<div align="center" class="showTitle">
-	
-	<div class="form-group">
-	<%= f.text_field :title, class: "form-control", placeholder: "Title of paper" %>
-	</div>
+<div class="container">
+
+<!-- get currentuser's Image -->
+	<div style="text-align: center;">
+		<%= gravatar_tag(current_user.email, size: 150) %>
 	</div>
 
-	<strong>Author:</strong> <%= current_user.username %>
-			<br>
-	<strong>Submitted:</strong> <%= Time.current.strftime('%m/%d/%Y (%I:%M%p)') %>
-	</div>
+<!-- Set Post Title      {//-try adding postTitle here...}-->
+	<h1 class="postTitle" >
+		<%= f.text_field :title, class: "formTitle", placeholder: "Title for Post (max 45 characters)" %>
+	</h1>
 
+<!-- Show current user's name and current time -->
+ 	<h3 class="postTitleH3">		
+ 		By: <%= current_user.username %>
+ 		<br>
+ 		Submitted:  <%= Time.current.strftime('%m/%d/%Y (%I:%M%p)') %>
+ 	</h3>
+
+<!-- (Hidden) - Collect current User's ID  -->
 	<div class="form-group hidden">
-	<%= f.number_field :user_id, value: current_user.id %>
+		<%= f.number_field :user_id, value: current_user.id %>
 	</div>
 
-<div class="panel-body bluish">
-<div class="panel-group" style="max-width: 800px; text-align: center;">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" href="#collapse1">Insert Code Here</a>
+
+
+<!-- Create New Post -->
+<div class="thumbnail">
+<div class="caption">
+ 
+ <!-- Collapsible Code Header --> 
+ <a data-toggle="collapse" href="#collapseForm2">
+  <div class="panel-group" style="max-width: 100%;">
+   <div class="panel panel-default">
+    
+    <div class="panel-heading expand">
+      <h4 class="panel-title" style="text-align: center; color: black">
+        Expand to Add Code
       </h4>
     </div>
-    <div id="collapse1" class="panel-collapse collapse">
-      <div class="panel-body">
-	<div class="form-group">
-	<%= f.text_area :codeblock, class: "form-control", rows: "5", placeholder: "Place your code here!" %>
-	</div>
-	 </div>
+ </a>
+    
+ <!-- Collapsible ViewBox -->
+ <div id="collapseForm2" class="panel-collapse collapse">
+    <div class="panel-body">
+			<strong>Codetype: </strong> 
+			<%= f.select :codetype, options_for_select(["HTML", "CSS", "ERB", "JavaScript", "Ruby"]) %>
+			<br><br>
+			<%= f.text_area :codeblock, class: "form-control maxFormBox", rows: "5", placeholder: "Place your code here!" %>
     </div>
-  </div>
+ </div> 
+ <!-- end ViewBox -->
+
+<!-- End Panel-default and -group -->
+</div> 
 </div>
 
-	<div class="form-group">
-	<%= f.text_area :entry, class: "form-control", rows: "12", placeholder: "Comments about your code..." %>
-	</div>
-</div>
+<!-- Questions/Comments about code -->
+	<h4><%= f.text_area :entry, class: "form-control maxFormBox", rows: "12", placeholder: "Comments about your code..." %></h4>
+	 
 
-<div class="panel-footer" id="boxColor">
+<!-- Close out Caption and Thumbnail view -->
+</div> 
+</div>
+	
+	
+<!-- Submit -->
 	<div class="actions">
-	<%= f.submit "Post", class: "btn btn-default" %>
+	<%= f.submit "Post", class: "btn btn-lg btn-success" %>
 	</div>
-</div>
-</div>
+
+
 	
 <% end %>

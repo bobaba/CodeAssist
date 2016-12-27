@@ -15,11 +15,10 @@
  */
 body{
 	/*background-color: #0B4C5F;*/
-	background-image: url('code.jpg');
 	background-size: 100%;
 	background-attachment: fixed;
 	background-repeat: no-repeat;
-	background-color: #c4ab6b;
+	background-color: #f2f4f4;
 }
 
 .container{
@@ -31,18 +30,11 @@ body{
 }
 
 .panel{
-	box-shadow: 5px 5px 5px rgba(000,000,000,0.5);
+	border: 1px solid black;
 }
 
 .form-group{
 	box-shadow: 5px 5px 5px rgba(000,000,000,0.5);
-}
-
-h1, h3{
-	font-family: 'Caveat Brush', cursive;
-	color: white;
-	text-shadow: 2px 2px 2px #000000;
-
 }
 
 .btn-block{
@@ -54,13 +46,7 @@ h1, h3{
 	border-radius: 7px;
 }
 
-.panel-heading{
-	box-shadow: 0px 3px 4px rgba(000,000,000,0.3);
-}
 
-.panel-footer{
-	box-shadow: 0px -1px 5px rgba(000,000,000,0.5);
-}
 
 .indexBody p{ 
 	min-height:100px; height:100px; 
@@ -74,14 +60,6 @@ h1, h3{
 	box-shadow: 0px 0px 10px 0px grey inset; 
 }
 
-#boxColor{
-	background-color: #000000;
-	color: white;
-}
-
-#boxColor2{
-	background-color: grey;
-}
 
 #indexMainTitle{
 	font-size: 75px;
@@ -95,12 +73,12 @@ h1, h3{
 	box-shadow: 0px 3px 4px rgba(000,000,000,0.3);
 }
 
-.bluish{
-	background-color: #9de7f9;	
+.caption h3{
+	text-align: center;
+	font-family: 'Lato', sans-serif;
 }
 
-
-pre{
+/*pre{
     background: url(http://i.imgur.com/2cOaJ.png);
 	background-attachment: local;
 	background-repeat: no-repeat;
@@ -108,8 +86,69 @@ pre{
 	padding-top: 10px;
     border-color:#ccc;
     font-size: 11.5px;
+    white-space: normal;
+
+}*/
+
+.maxFormBox{
+	max-width: 100%;
 }
 
-code rows:nth-child(even){
-	background-color: red;
+.postTitle{
+	text-align: center;
+	font-weight: 300;
+	font-family: 'Lado', sans-serif;
+	text-transform: uppercase;
+	font-size: 60px;
+	margin-bottom: 20px;
+	margin-top: 40px;
+}
+
+.postTitleH3{
+	text-align: center;
+	font-weight: 200;
+	font-family: 'Lado', sans-serif;
+	text-transform: uppercase;
+	font-size: 30px;
+	margin-bottom: 20px;
+}
+#boxColor{
+	background-color: #d3cba5;
+	border-bottom: 1px solid black;
+}
+
+#boxColor2{
+	background-color: #a5d3ae;
+	border-bottom: 1px solid black;
+}
+
+.expand{
+	background-color: orange;
+}
+.panel-heading{
+	box-shadow: 0px 3px 4px rgba(000,000,000,0.3);
+}
+
+.panel-footer{
+	box-shadow: 0px -3px 4px rgba(000,000,000,0.2);
+	border-top: 1px solid black;
+}
+
+.controlCode{
+	overflow-x: auto;
+	width: 100%;
+}
+
+.code{
+	width: 100%;
+}
+
+.formTitle {
+	width: 100%;
+	margin: auto;
+	box-sizing: all;
+	text-align: center;
+	border: none;
+	background-color: transparent;
+	
 }

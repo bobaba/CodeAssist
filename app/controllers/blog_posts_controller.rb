@@ -1,8 +1,33 @@
 class BlogPostsController < ApplicationController
 	before_action :set_blog_post, only: [:show, :edit, :update, :destroy]
+  require 'coderay'
   
   def index
-  	@blog_posts = BlogPost.all
+  	@blog_posts = BlogPost.all 
+  end
+
+  def answerPosts
+    @allPosts = BlogPost.all
+    @blog_posts = []
+
+    @allPosts.reverse_each do |narrow|
+      if narrow.answered == true
+        @blog_posts.push(narrow)
+      end
+    end 
+
+  end
+
+  def unanswerPosts
+    @allPosts = BlogPost.all
+    @blog_posts = []
+
+    @allPosts.reverse_each do |narrow|
+      if narrow.answered == false
+        @blog_posts.push(narrow)
+      end
+    end 
+
   end
 
   def show
@@ -18,6 +43,7 @@ class BlogPostsController < ApplicationController
 
   def user_profile
     @user = User.find(params[:id])
+    @blog_posts = BlogPost.all
   end
 
   def new
@@ -57,7 +83,7 @@ class BlogPostsController < ApplicationController
   private
 
   def blog_post_params
-  	params.require(:blog_post).permit(:title, :entry, :user_id, :category, :codeblock)
+  	params.require(:blog_post).permit(:title, :entry, :user_id, :category, :codeblock, :codetype)
   end
 
   def set_blog_post
