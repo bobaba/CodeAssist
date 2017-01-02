@@ -11,16 +11,14 @@
         </button>
           <ul class="nav navbar-nav navbar-left">
             <li><%= link_to "CodeAssist", root_path, class: "navbar-brand" %></li>
-            <li><%= link_to "[+] Code", new_blog_post_path %></li>
-
+            <li><%= link_to "[+] Code", new_blog_post_path, class: "navbar-brand navAddCode" %></li>
           </ul>
-  </a>
       </div>
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
           <li><%= link_to "Your Submissions", your_posts_path %></li>   
-          <li> <%= link_to "Edit Profile", edit_user_registration_path %></li>
+          <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
           <li><%= link_to "Profile", user_profile_path(id: current_user.id) %> </li>
           <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete%></li>
         </ul>

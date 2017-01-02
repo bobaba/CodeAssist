@@ -1,12 +1,12 @@
 <br><br>
 <div class="container">
-<h1 class="postTitle"><%= @user.username %>'s Activity</h1>
+<h1 class="postTitle"><%= @user.username %>'s Activity </h1>
+<h1 class="postTitle">________</h1>
+<h1 class="postTitle">Recent Posts</h1>
 
-<h1 class="postTitle"><%= @user.username %>'s Posts</h1>
-SOLUTIONS PROVIDED: <%= @user.solPoints %>
 <div class="row">
 <br>
-	<% @user.blog_posts.reverse_each do |blog_post| %>
+	<% @user.blog_posts.reverse.last(3).each do |blog_post| %>
 		<div class="col-md-4">
 		<div class="thumbnail" style="padding-top: 15px; margin: 10px;">
 				<%= link_to gravatar_tag(blog_post.user.email, size: 100), blog_post %>
@@ -33,11 +33,60 @@ SOLUTIONS PROVIDED: <%= @user.solPoints %>
 		</div>
 	<% end %>
 </div>
+<br>
+<!-- Expand to view more posts section -->
+	<% if @user.blog_posts.count > 3 %>
+		<a data-toggle="collapse" href="#collapseUserPosts">
+			<div class="panel-group" style="max-width: 100%;">
+		  	<div class="panel panel-default">
+		    <div class="panel-heading expand">
+		      <h4 class="panel-title" style="text-align: center; color: black;">
+		        Expand to View Older Posts
+		      </h4>
+		    </div></a>
+		    <div id="collapseUserPosts" class="panel-collapse collapse">
+		      <div class="panel-body" style = "background-color: #f2f4f4;">
+
+		    <% @user.blog_posts.reverse.drop(3).each do |blog_post| %>
+			<div class="col-md-4">
+			<div class="thumbnail" style="padding-top: 15px; margin: 10px;">
+				<%= link_to gravatar_tag(blog_post.user.email, size: 100), blog_post %>
+			<div class="caption">
+				<h3 style="height: 55px; margin-bottom: 20px;"><%= link_to blog_post.title, blog_post,{:style=>'color:#000000; text-decoration: none;'} %></h3>
+				
+				<p style="height: 140px;"><%= blog_post.entry[0..300] %><% if blog_post.entry.size > 300 %>...<% end %></p>
+				Submitted: <%= blog_post.created_at.strftime('%m/%d/%Y (%I:%M%p)') %>
+				<br>
+				<strong><%= blog_post.comments.count %></strong> Comments
+				<br><br>				
+				<p><%= link_to 'Read more', blog_post, class: "btn btn-default" %>
+				
+				<% if blog_post.answered == true %>
+					<%= link_to 'Answered', blog_post, class: "btn btn-success pull-right" %>
+					<% else %>
+					<%= link_to 'Unanswered', blog_post, class: "btn btn-warning pull-right" %>
+			<% end %>
+				<br>
+				</p>
+			</div>
+		</div>
+		</div>
+	<% end %>
+
+		      </div>
+		     </div>
+		    </div>
+		   </div>
 
 
-<h1 class="postTitle">Solutions Provided</h1>
+	<% end %>
 
-<% @user.comments.reverse_each do |answer| %>
+</div>
+
+
+<h1 class="postTitle">Solutions Provided (<%= @user.solPoints %>)</h1>
+<div class = "container">
+<% @user.comments.reverse.first(5).each do |answer| %>
 	<% if answer.rating == 1 %>
 	
 	<h3 class="postTitleH3"><br>
@@ -45,6 +94,54 @@ SOLUTIONS PROVIDED: <%= @user.solPoints %>
         on <%= link_to @blog_posts.find(answer.blog_post_id).title, @blog_posts.find(answer.blog_post_id) %> &nbsp&nbsp 
         <small><%= time_ago_in_words(answer.created_at) %> ago</small>
 	</h3>
+
+<div class="thumbnail" style= "background-color: #c7e5d1;">
+  <div class="caption" >
+  		<% unless answer.codeblock.size == 0 %>
+		<a data-toggle="collapse" href="#collapse<%= answer.id %>">
+			<div class="panel-group" style="max-width: 100%;">
+		  	<div class="panel panel-default">
+		    <div class="panel-heading expand">
+		      <h4 class="panel-title" style="text-align: center; color: black;">
+		        Expand to View Code
+		      </h4>
+		    </div></a>
+		    <div id="collapse<%= answer.id %>" class="panel-collapse collapse">
+		      <div class="panel-body">
+		      &emsp;&emsp;&emsp;<strong>Codetype:</strong> <%= answer.codetype %><br>
+		      <% findIt = Comment.new %> 
+		  <div class="controlCode"><%= findIt.codeType(answer.codetype, answer.codeblock.strip) %></div>
+		      </div>
+		     </div>
+		    </div>
+		   </div>
+		 <% end %>
+		<p><h3 style="text-align: left;"><%= simple_format(answer.entry) %></h3></p>
+	</div>
+</div>
+	<% end %>
+<% end %>
+
+<!-- Expand to see more section for Solutions -->
+<% if @user.comments.where(rating: 1).count > 5 %>
+	<a data-toggle="collapse" href="#collapseUserSols">
+	<div class="panel-group" style="max-width: 100%;">
+		<div class="panel panel-default">
+		    <div class="panel-heading expand">
+		      <h4 class="panel-title" style="text-align: center; color: black;">
+		        Expand to View More Solutions
+		      </h4>
+		    </div></a>
+		    <div id="collapseUserSols" class="panel-collapse collapse">
+		      <div class="panel-body" style="background-color: #f2f4f4;">
+  		<% @user.comments.reverse.drop(5).each do |answer| %>
+		<% if answer.rating == 1 %>
+	
+			<h3 class="postTitleH3"><br>
+				<%= image_tag('https://techtalentsouth.com/images/logo.png', size: 25) %><br><br>
+		        on <%= link_to @blog_posts.find(answer.blog_post_id).title, @blog_posts.find(answer.blog_post_id) %> &nbsp&nbsp 
+		        <small><%= time_ago_in_words(answer.created_at) %> ago</small>
+			</h3>
 
 <div class="thumbnail" style= "background-color: #c7e5d1;">
   <div class="caption" >
@@ -71,8 +168,14 @@ SOLUTIONS PROVIDED: <%= @user.solPoints %>
 </div>
 	<% end %>
 <% end %>
+		      </div>
+		    </div>
+		</div>
+	</div>
+	
+<% end %>
 
-
+</div>
 
 </div>
 </div>

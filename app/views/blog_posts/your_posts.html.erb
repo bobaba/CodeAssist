@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 <link href="https://fonts.googleapis.com/css?family=Caveat+Brush" rel="stylesheet">
-
+<br><br> 
 <div class="container">
-
+<h1 class="postTitle">Your Submissions</h1>
 
 <div class="row">
 <br>
@@ -17,22 +17,19 @@
 				<!-- style h3 to model TTS -->
 				<h3 style="height: 55px; margin-bottom: 20px;"><%= link_to blog_post.title, blog_post,{:style=>'color:#000000; text-decoration: none;'} %></h3>
 				
-				<p style="height: 140px;"><%= blog_post.entry[0..300] %><% if blog_post.entry.size > 300 %>...<% end %></p>
+				<p style="height: 140px;"><%= blog_post.entry[0..225] %><% if blog_post.entry.size > 300 %>...<% end %></p>
 				Submitted: <%= blog_post.created_at.strftime('%m/%d/%Y (%I:%M%p)') %>
 				<br>
 				<strong><%= blog_post.comments.count %></strong> Comments
 				<br><br>				
-				<p><%= link_to 'Read more', blog_post, class: "btn btn-default" %>
-				   <%= link_to 'Edit', edit_blog_post_path(blog_post), class: "btn btn-warning" %>
+				<p>
+				  <%= link_to 'Edit', edit_blog_post_path(blog_post), class: "btn btn-warning" %>
 				<% if blog_post.answered == true %>
 					<%= link_to 'Answered', blog_post, class: "btn btn-success pull-right" %>
 					<% else %>
 					<%= link_to 'Unanswered', blog_post, class: "btn btn-warning pull-right" %>
 					<% end %>
 					<br>
-				<div style="text-align: center;">
-				
-				</div>
 				</p>
 				
 

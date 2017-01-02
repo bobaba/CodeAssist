@@ -16,7 +16,7 @@
 	<h1 class="postTitle"><%= @blog_post.title %></h1>
  	
  	<h3 class="postTitleH3">		
- 	By: <%= @blog_post.user.username %>
+ 	By: <%= link_to @blog_post.user.username, user_profile_path(id: @blog_post.user.id),{:style=>'color:#000000; text-decoration: none;'} %>
  	<br>Submitted:  <%= @blog_post.created_at.strftime('%b %d, %Y at %I:%M%p') %>
  	</h3>
 	
@@ -24,6 +24,7 @@
 <div class="thumbnail">
 <div class="caption">
 
+<% unless @blog_post.codeblock.size == 0 %>
 <a data-toggle="collapse" href="#collapseForm2">
 <div class="panel-group" style="max-width: 100%;">
   <div class="panel panel-default">
@@ -46,8 +47,8 @@
   
   </div>  
 </div>
-		
-	<p><h3 style="text-align: left;"><%= @blog_post.entry %></h3></p>
+<% end %>		
+	<p><h3 style="text-align: left;"><%= simple_format(@blog_post.entry) %></h3></p>
 </div>
 </div>
 		
@@ -64,6 +65,8 @@
 
 <div class="thumbnail" style= "background-color: #c7e5d1;">
   <div class="caption" >
+
+  <% unless answer.codeblock.size == 0 %>
 		<a data-toggle="collapse" href="#collapse<%= answer.id %>">
 			<div class="panel-group" style="max-width: 100%;">
 		  	<div class="panel panel-default">
@@ -81,8 +84,8 @@
 		     </div>
 		    </div>
 		   </div>
-
-		<p><h3 style="text-align: left;"><%= answer.entry %></h3></p>
+	<% end %>
+		<p><h3 style="text-align: left;"><%= simple_format(answer.entry) %></h3></p>
 	</div>
 
 		<% if current_user.id == @blog_post.user.id %>
