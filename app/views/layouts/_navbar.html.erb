@@ -19,7 +19,7 @@
         <ul class="nav navbar-nav navbar-right">
           <li><%= link_to "Your Submissions", your_posts_path %></li>   
           <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
-          <li><%= link_to "Profile", user_profile_path(id: current_user.id) %> </li>
+          <li><%= link_to "View Profile", user_profile_path(id: current_user.id) %> </li>
           <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete%></li>
         </ul>
       </div><!-- /.navbar-collapse -->

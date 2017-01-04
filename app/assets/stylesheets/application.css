@@ -173,3 +173,9 @@ body{
 .navAddCode{
 	font-size: 17px;
 }
+
+@media (max-width: 600px){
+	.nav {
+		margin-left: 20px;
+	}
+}

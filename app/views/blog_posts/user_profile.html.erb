@@ -6,7 +6,7 @@
 
 <div class="row">
 <br>
-	<% @user.blog_posts.reverse.last(3).each do |blog_post| %>
+	<% @user.blog_posts.reverse.first(3).each do |blog_post| %>
 		<div class="col-md-4">
 		<div class="thumbnail" style="padding-top: 15px; margin: 10px;">
 				<%= link_to gravatar_tag(blog_post.user.email, size: 100), blog_post %>
