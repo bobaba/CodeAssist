@@ -10,7 +10,7 @@ class BlogPostsController < ApplicationController
     @allPosts = BlogPost.all
     @blog_posts = []
 
-    @allPosts.reverse_each do |narrow|
+    @allPosts.each do |narrow|
       if narrow.answered == true
         @blog_posts.push(narrow)
       end
@@ -22,7 +22,7 @@ class BlogPostsController < ApplicationController
     @allPosts = BlogPost.all
     @blog_posts = []
 
-    @allPosts.reverse_each do |narrow|
+    @allPosts.each do |narrow|
       if narrow.answered == false
         @blog_posts.push(narrow)
       end
